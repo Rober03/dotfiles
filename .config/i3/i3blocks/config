@@ -1,0 +1,50 @@
+separator_block_width=25
+
+[weekend]
+label=  
+command= SECS=$(( $(date --date="Fri. 17:30" +%s) - $(date +%s) )) && printf '%dd %dh %dm\n' $(($SECS/86400)) $(($SECS%86400/3600)) $(($SECS%3600/60))
+interval=15
+color=#F99D9F
+
+[disk-root]
+label=  
+command=~/.config/i3/i3blocks/disk /
+interval=30
+color=#9aedfe
+
+[memory]
+label=  
+command=~/.config/i3/i3blocks/memory
+interval=15
+color=#ff6ac1
+
+[cpu]
+label=  
+command=~/.config/i3/i3blocks/cpu_usage
+interval=5
+color=#ff5c57
+
+[load]
+label=  
+command=~/.config/i3/i3blocks/load_average
+interval=5
+color=#57c7ff
+
+[volume]
+label=  
+command=~/.config/i3/i3blocks/volume
+interval=2
+signal=10
+color=#FFB86C
+
+[battery]
+label=  
+command=~/.config/i3/i3blocks/battery BAT0
+interval=30
+color=#F9E060
+
+[time]
+label=  
+command=date '+%a %d %b %R:%S %p'
+interval=1
+color=#5af78e
