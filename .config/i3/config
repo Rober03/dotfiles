@@ -11,7 +11,7 @@ font pango:monospace 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
+# start a terminal (Alacritty)
 bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
@@ -20,25 +20,22 @@ bindsym $mod+Shift+q kill
 # start rofi
 bindsym $mod+d exec rofi -show run
 
-# Focus
+# Focus (Include cursor keys)
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
 
-# alternatively, you can use the cursor keys:
+
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -72,26 +69,22 @@ bindsym $mod+a focus parent
 set $ws1 1 :  browser
 set $ws2 2 :  terminal
 set $ws3 3 :  code
+set $ws4 4 :  chill
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
 bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
 
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-# resize window
+# Resize options
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -118,6 +111,20 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Power options
+set $mode_power Power: (l) logout, (r) reboot, (s) shutdown
+mode "$mode_power" {
+    bindsym l mode "default", exec --no-startup-id ~/.config/i3/i3exit logout
+    bindsym r mode "default", exec --no-startup-id ~/.config/i3/i3exit reboot
+    bindsym s mode "default", exec --no-startup-id ~/.config/i3/i3exit shutdown
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+control+l mode "$mode_power"
+
 # Bar appearance
 bar {
 	font pango:DejaVu Sans, Font Awesome 5 Free Solid 10
@@ -137,11 +144,6 @@ bar {
         	urgent_workspace #cc6666 #cc6666 #ffffff
     	}
 }
-
-client.focused #81a2be #81a2be #1d1f21 #282a2e
-client.focused_inactive #373b41 #373b41 #969896 #282a2e
-client.unfocused #282a2e #282a2e #969896 #282a2e
-client.urgent #373b41 #cc6666 #ffffff #cc6666
 
 #Change layout to spanish
 exec --no-startup-id setxkbmap -layout es

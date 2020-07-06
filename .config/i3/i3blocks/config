@@ -1,5 +1,6 @@
 separator_block_width=25
 
+
 [weekend]
 label=  
 command= SECS=$(( $(date --date="Fri. 17:30" +%s) - $(date +%s) )) && printf '%dd %dh %dm\n' $(($SECS/86400)) $(($SECS%86400/3600)) $(($SECS%3600/60))
@@ -39,7 +40,7 @@ color=#FFB86C
 
 [battery]
 label=  
-command=~/.config/i3/i3blocks/battery BAT0
+command=~/.config/i3/i3blocks/battery
 interval=30
 color=#F9E060
 
